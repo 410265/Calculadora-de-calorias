@@ -169,6 +169,11 @@ if (altura < 50 || altura > 250) {
     resultado.innerHTML = `<h2>Por favor, introduce una altura válida (50-250 cm).</h2>`;
     return;
 }
+// Validación de campos vacíos
+if (!edad || !peso || !altura || !genero || !actividad || !objetivo) {
+    resultado.innerHTML = `<h2>Por favor, completa todos los campos del formulario.</h2>`;
+    return;
+}
     </script>
 </body>
 </html>
