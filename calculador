@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Calorías 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .resultado {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Calorías</h1>
+    <form id="formulario">
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" placeholder="Años" required>
+        
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Kilogramos" required>
+        
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" placeholder="Centímetros" required>
+        
+        <label for="genero">Género:</label>
+        <select id="genero" required>
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+        </select>
+        
+        <label for="actividad">Nivel de Actividad:</label>
+        <select id="actividad" required>
+            <option value="1.2">Sedentario</option>
+            <option value="1.375">Actividad ligera</option>
+            <option value="1.55">Moderadamente activo</option>
+            <option value="1.725">Muy activo</option>
+            <option value="1.9">Extremadamente activo</option>
+        </select>
+        
+        <label for="objetivo">Objetivo:</label>
+        <select id="objetivo" required>
+            <option value="perder">Perder peso</option>
+            <option value="mantener">Mantener peso</option>
+            <option value="ganar">Ganar peso</option>
+        </select>
+        
+        <button type="submit">Calcular</button>
+    </form>
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+        const formulario = document.getElementById('formulario');
+        const resultado = document.getElementById('resultado');
+
+        formulario.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const edad = parseInt(document.getElementById('edad').value);
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const genero = document.getElementById('genero').value;
+            const actividad = parseFloat(document.getElementById('actividad').value);
+            const objetivo = document.getElementById('objetivo').value;
+
+            let tmb;
+
+            // Fórmula de Harris-Benedict
+            if (genero === "hombre") {
+                tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad);
+            } else {
+                tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad);
+            }
+
+            let calorias = tmb * actividad;
+
+            // Ajuste según el objetivo
+            if (objetivo === "perder") {
+                calorias -= 500;
+            } else if (objetivo === "ganar") {
+                calorias += 500;
+            }
+
+            resultado.innerHTML = `<h2>Calorías Diarias: ${calorias.toFixed(2)} kcal</h2>`;
+        });
+    </script>
+</body>
+</html>
+
