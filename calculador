@@ -156,6 +156,19 @@
 
             resultado.innerHTML = `<h2>Calorías Diarias: ${calorias.toFixed(2)} kcal</h2>`;
         });
+// Validación de entradas
+if (edad < 1 || edad > 120) {
+    resultado.innerHTML = `<h2>Por favor, introduce una edad válida (1-120 años).</h2>`;
+    return;
+}
+if (peso < 2 || peso > 300) {
+    resultado.innerHTML = `<h2>Por favor, introduce un peso válido (2-300 kg).</h2>`;
+    return;
+}
+if (altura < 50 || altura > 250) {
+    resultado.innerHTML = `<h2>Por favor, introduce una altura válida (50-250 cm).</h2>`;
+    return;
+}
     </script>
 </body>
 </html>
